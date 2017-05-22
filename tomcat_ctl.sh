@@ -12,7 +12,7 @@
 
 # Please change these variables when deploy new apps:
 CATALINA_OPTS='"-server -Xms512M -Xmx1024M -XX:PermSize=256M -XX:MaxPermSize=512M"'
-APP_NAME="[ccl|plugin|onecard|tsmweb|<newAPP>]"
+APP_NAME="[app1|app2|app3|<newAPP>]"
 
 # Do not change these variables:
 ACTION="[start|stop|restart|[deploy <username>]]" 
@@ -117,7 +117,7 @@ fun_deploy ()
   cp $CATALINA_HOME/conf/* ${CATALINA_BASE}/conf/
   echo "CATALINA_OPTS=${CATALINA_OPTS}" >> ${CATALINA_BASE}/bin/setenv.sh
   chown -R ${OWNER_NAME}:${OWNER_NAME} ${CATALINA_BASE}
-  sed -i 's/\(APP_NAME=".*\)\(<newAPP>]"$\)/\1test|\2/' $0
+  sed -i 's/\(APP_NAME=".*\)\(<newAPP>]"$\)/\1'"${NEW_APP}"'|\2/' $0
   echo "Success! New App: \"${NEW_APP}\" deployed in ${CATALINA_BASE}"
   echo "Important!!! Remember to modify the listen port in file: ${CATALINA_BASE}/conf/server.xml"
 }
